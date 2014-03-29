@@ -1,0 +1,72 @@
+bndproj.m - 2D done, 3D, TODO
+    Project boundary points to true boundary
+boundedges.m - 2D, done
+    Find boundary edges from triangular mesh
+circumcenter.m - ND, TODO
+    Center of cirle
+dblock.m - fd, 3D, TODO
+    Distance function - 3D rectangle
+dcircle.m - fd, 2D, done
+    Distance function - circe
+ddiff.m - fd, done
+    Distance function - diff = set1 - set2
+dellipse.cpp - fd, 2D, TODO
+    Compute distance from points p to the ellipse centered at the origin with axes=[a,b].
+dellipsoid.cpp - fd, 3D, TODO
+    Compute distance from points p to the ellipsoid centered at the origin with axes=[a,b,c].
+dexpr.m - does not be implemented
+    Compute signed distance function for general implicit expression fin. The parameters nit and alpha have the default values 20 and 0.1.
+dintersect.m fd, done
+    Compute signed distance function for set intersection of two regions described by signed distance functions d1,d2.
+distmesh2d.m - 2D, done
+    2-D Mesh Generator
+distmesh2doriginal.m
+
+distmeshnd.m 3D, TODO
+    3-D Mesh Generator
+distmeshsurface.m 3d, TODO
+    3-D Surface Mesh Generator using Distance Functions.
+dmatrix.m 2D, TODO
+    Compute signed distance function by interpolation of the values dd on the Cartesian grid xx,yy.
+dmatrix3d.m 3D, TODO
+    Compute signed distance function by interpolation of the values dd on the Cartesian grid xx,yy,zz.
+dpoly.m 2D, done
+    Compute signed distance function for polygon with vertices pv.
+drectangle.m 2D done
+    Compute signed distance function for rectangle with corners (x1,y1), (x2,y1), (x1,y2), (x2,y2).
+drectangle0.m 2D done
+    Compute signed distance function for rectangle with corners (x1,y1), (x2,y1), (x1,y2), (x2,y2).
+dsphere.m TODO
+    Compute signed distance function for sphere centered at xc,yc,zc with radius r.
+dunion.m 2D, done
+    Compute signed distance function for set union of two regions described by signed distance functions d1,d2.
+fixmesh.m partially done TODO Remove duplicated and unused nodes
+    Remove duplicated and unused nodes from p and update t correspondingly. Also make all elements orientations equal.
+hmatrix.m 2D TODO
+    Compute mesh size function by interpolation of the values hh on the Cartesian grid xx,yy.
+hmatrix3d.m 3D  TODO
+    Compute mesh size function by interpolation of the values hh on the Cartesian grid xx,yy,zz.
+huniform.m done
+    Implements the trivial uniform mesh size function h=1.
+meshdemo2d.m
+    Demonstration of distmesh2d.
+meshdemond.m
+    Demonstration of distmesh2d.
+mkt2t.m
+    Compute element connectivities from element indices.
+protate.m TODO
+    Rotate points p the angle phi around origin.
+pshift.m  TODO
+    Move points p by (x0,y0).
+simpplot.m done
+    Plot 2-D or 3-D mesh p,t. The parameters expr, bcol, icol are only used in 3-D and they have default values.
+simpqual.m TODO
+    Compute qualities of triangular or tetrahedral elements in the mesh p,t. If type==1 (default) the inradius/outradius expression is used. If type==2 a slightly different expression is used.
+simpvol.m done
+    Compute the signed volumes of the simplex elements in the mesh p,t.
+surftri.m 3D
+    Find all the surface triangles tri in tetrahedral mesh p,t.
+trisurfupd.cpp nedelat
+    Used in distmeshsurface
+uniref.m TODO
+    Uniform mesh refinement
