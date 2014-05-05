@@ -117,7 +117,7 @@ public class BoundEdgesTest {
 
     @Test
     public void testGetBoundaryEdges() throws Exception {
-        final List<BoundBar> edges = new BoundEdges().getBoundaryEdges(new int[][]{{0, 1, 2}});
+        final List<BoundBar> edges = new BoundEdges().getBoundaryEdges(new int[][]{{0, 1, 2}}, 3);
 
         Assert.assertEquals(3, edges.size());
 

@@ -43,7 +43,8 @@ public class BoundEdges {
         final List<Pnt> pnts = Matlab.asPntList(p);
 
         //Form all edges, non-duplicates are boundary edges
-        List<BoundBar> e = getBoundaryEdges(t);
+        final int n = p.length > 0 ? p[0].length + 1 : 0;
+        List<BoundBar> e = getBoundaryEdges(t, n);
 
         //Orientation
         setupOrientation(pnts, e);
@@ -69,7 +70,7 @@ public class BoundEdges {
         }
     }
 
-    List<BoundBar> getBoundaryEdges(int[][] t) {
+    List<BoundBar> getBoundaryEdges(int[][] t, int n) {
         //% Form all edges, non-duplicates are boundary edges
         //edges=[t(:,[1,2]);
         //       t(:,[1,3]);
@@ -86,12 +87,12 @@ public class BoundEdges {
         Set<BoundBar> innerEdges = new TreeSet<BoundBar>();
         for (int i = 0; i < t.length; i++) {
             int[] tr = t[i];
-            final int n = tr.length;
             for (int j = 0; j < n; j++) {
                 int a = tr[j];
                 int b = tr[(j + 1) % n];
                 int c = tr[(j + 2) % n];
                 final BoundBar bar = createBar(a, b, c, i);
+                bar.setIx(j);
                 if (edges.contains(bar)) {
                     innerEdges.add(bar);
                 } else {

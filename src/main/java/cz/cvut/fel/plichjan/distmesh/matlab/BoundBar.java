@@ -5,6 +5,7 @@ package cz.cvut.fel.plichjan.distmesh.matlab;
 public class BoundBar extends Bar {
     private int c;
     private int tr;
+    private int ix;
 
     public BoundBar(int a, int b) {
         super(a, b);
@@ -35,5 +36,13 @@ public class BoundBar extends Bar {
 
     public void setTr(int tr) {
         this.tr = tr;
+    }
+
+    public int getIx() {
+        return ix;
+    }
+
+    public void setIx(int ix) {
+        this.ix = ix;
     }
 }

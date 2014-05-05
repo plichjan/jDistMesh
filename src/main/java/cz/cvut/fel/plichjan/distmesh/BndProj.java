@@ -28,10 +28,15 @@ public class BndProj {
         //e=boundedges(p,t);
         final List<BoundBar> bars = new BoundEdges().call(p, t);
         //e=unique(e(:));
+        final int dimT0 = p.length > 0 ? p[0].length + 1 : 0;
+        final int dimT = t.length > 0 ? t[0].length : 0;
         Set<Integer> eSet = new TreeSet<Integer>();
         for (BoundBar bar : bars) {
             eSet.add(bar.getA());
             eSet.add(bar.getB());
+            if (dimT > dimT0) {
+                eSet.add(t[bar.getTr()][bar.getIx() + dimT0]);
+            }
         }
 
         //d=feval(fd,p(e,:),varargin{:});

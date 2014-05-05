@@ -646,37 +646,37 @@ distMesh2D.call(
         []
 );
 */
-//// 01_temaDIP_cantilever.pdf Fig. 3 (a)
-//var
-//        L = 200e-6,
-//        t = 3e-6,
-//        g = 2e-6,
-//        w = 50e-6,
-//        alpha = 0.1,
-//        V = 28;
-//// w, t are width and thickness of the beam, alpha is ratio of electrode length (l_e) over beam length (L)
-//var l_e = alpha * L;
-//var width = 2*L;
-//var height = 2*g + t;
-//
-////two electrodes and space between
-//var h0 = Math.min(t, g) / 4.;
-//var beam = new DRectangle0(0., L, g, g + t);
-//var electrode = new DRectangle0(L - l_e, L, 0. - t, 0.);
-//var pLeft = new DPoly([[0, g], [0, g + t]]);
-//var pRight = new DPoly([[L, g], [L, g + t]]);
-//var pBottom = new DPoly([[0, g], [L, g]]);
-//var pTop = new DPoly([[0, g + t], [L, g + t]]);
-//function fh(x, y) {
-//    return Math.min(
-//            h0+0.05*Math.abs(pLeft.call(x,y)),
-//            2*h0+0.05*Math.abs(pRight.call(x,y)),
-//            L/100+0.05*Math.abs(pBottom.call(x,y)),
-//            L/100+0.05*Math.abs(pTop.call(x,y)),
-//            4*h0+0.05*Math.abs(electrode.call(x,y)));
-//}
-//
-//var area1 = new DUnion(electrode, beam);
+// 01_temaDIP_cantilever.pdf Fig. 3 (a)
+var
+        L = 200e-6,
+        t = 3e-6,
+        g = 2e-6,
+        w = 50e-6,
+        alpha = 1,
+        V = 16-0.86;
+// w, t are width and thickness of the beam, alpha is ratio of electrode length (l_e) over beam length (L)
+var l_e = alpha * L;
+var width = 2*L;
+var height = 2*g + t;
+
+//two electrodes and space between
+var h0 = Math.min(t, g) / 4.;
+var beam = new DRectangle0(0., L, g, g + t);
+var electrode = new DRectangle0(L - l_e, L, 0. - t, 0.);
+var pLeft = new DPoly([[0, g], [0, g + t]]);
+var pRight = new DPoly([[L, g], [L, g + t]]);
+var pBottom = new DPoly([[0, g], [L, g]]);
+var pTop = new DPoly([[0, g + t], [L, g + t]]);
+function fh(x, y) {
+    return Math.min(
+            h0+0.05*Math.abs(pLeft.call(x,y)),
+            2*h0+0.05*Math.abs(pRight.call(x,y)),
+            L/100+0.05*Math.abs(pBottom.call(x,y)),
+            L/100+0.05*Math.abs(pTop.call(x,y)),
+            4*h0+0.05*Math.abs(electrode.call(x,y)));
+}
+
+var area1 = new DUnion(electrode, beam);
 ///*
 //distMesh2D.dptol = 0.01;
 //var mesh = distMesh2D.call(
@@ -757,28 +757,30 @@ distMesh2D.call(
 //var mesh2 =
 //new AddMidpoints().call(node, tr);
 //*/
-//
-//var mesh2 =
-//new FreeFemMeshReader("c:\\Program Files\\FreeFem++-cs-14.3\\Contents\\Resources\\cantilever").getMesh();
-//mesh2 = new AddMidpoints().call(mesh2.p, mesh2.t);
-//viewFrame.drawMesh(mesh2);
-//
-//// for test
-//h0 /= 1000.;
-//var lbCorner = new DCircle(0, g, 0);
-//
-//var file = dir + "cantilever";
-//storeMesh(file, mesh2, h0, [
-//    {df: beam, flags: IS_SET_POTENTIAL | WALL_NODE, potential: 0. },
-//    {df: electrode, flags: IS_SET_POTENTIAL | WALL_NODE, potential: V },
-//    {df: new DPoly([[0, 0], [width, 0]]), flags: IS_SET_DISPLACEMENT, displacement: [0., 0.]},
-//    {df: new DPoly([[0, g], [0, g + t]]), flags: IS_SET_DISPLACEMENT, displacement: [0., 0./0]},
-//    {df: lbCorner, flags: IS_SET_DISPLACEMENT, displacement: [0., 0.]}
-//], [
-//    {df: forEvery, matId: 10}, // air
-//    {df: area1, matId: 19} // E = 57e9
-//]);
-//
+
+var mesh2 =
+new FreeFemMeshReader("c:\\Program Files\\FreeFem++-cs-14.3\\Contents\\Resources\\examples\\cantilever").getMesh();
+mesh2 = new AddMidpoints().call(mesh2.p, mesh2.t);
+viewFrame.drawMesh(mesh2);
+
+// for test
+h0 /= 1000.;
+var lbCorner = new DCircle(0, g, 0);
+
+var file = dir + "cantilever";
+storeMesh(file, mesh2, h0, [
+    {df: beam, flags: IS_SET_POTENTIAL | WALL_NODE, potential: 0. },
+    {df: electrode, flags: IS_SET_POTENTIAL | WALL_NODE, potential: V },
+    {df: new DPoly([[0, 0], [width, 0]]), flags: IS_SET_DISPLACEMENT | WALL_NODE, displacement: [0., 0.]},
+    {df: new DPoly([[0, g], [0, g + t]]), flags: IS_SET_DISPLACEMENT | WALL_NODE, displacement: [0., 0./0]},
+    {df: new DCircle(L, g, 0), flags: IS_PRINTABLE },
+    {df: lbCorner, flags: IS_SET_DISPLACEMENT, displacement: [0., 0.]}
+], [
+    {df: forEvery, matId: 10}, // air
+    {df: area1, matId: 19} // E = 57e9
+]);
+
+/*
 var b = 5e-6;
 var h = 5e-6;
 var L = 10e-6;
@@ -808,9 +810,7 @@ storeMesh(file, mesh2, h0 / 1000., [
     {df: beam, matId: 200} // E = 1e5
 ]);
 
-/*
 // electrostatic part
-*/
 //b*=10;
 beam = new DRectangle0(0., b, 0, L);
 // for electrostatic-mechanic
@@ -849,8 +849,31 @@ storeMesh(file2, mesh2, h0 / 1000, [
     {df: beam, matId: 200} // E = 1e5
 ]);
 //= 9.96096038e-8 - F podle vzorce
+*/
 
+/*
 (function () {
-    var x;
+    var beam = new DRectangle0(0, 1, 0, 1);
+    var mesh2;
+    mesh2 = distMesh2D.call(
+            beam,
+            new HUniform(),
+            1, [[0, 0], [1, 1]],
+            [[0, 0], [0, 1], [1, 0], [1, 1]]
+    );
+    mesh2 = new AddMidpoints().call(mesh2.p, mesh2.t);
+    viewFrame.drawMesh(mesh2);
+
+    var file2 = dir + "example";
+    storeMesh(file2, mesh2, 1 / 1000, [
+        {df: new Inside(beam), flags: IS_SET_POTENTIAL | WALL_NODE, potential: 12},
+        {df: new DPoly([[0, 0], [0, 1]]), flags: IS_SET_DISPLACEMENT, displacement: [0./0., 0.]},
+        {df: new DCircle(0, 0, 0), flags: IS_SET_DISPLACEMENT, displacement: [0., 0.]},
+        {df: new DPoly([[1, 0], [1, 1]]), flags: IS_SET_BOUNDARY_FORCE, bForce: [250., 0.]},
+        {df: new DCircle(1, 0.5, 0), flags: IS_PRINTABLE}
+    ], [
+        {df: forEvery, matId: 19} // air - equals thickness as 200
+    ]);
 })();
+*/
 
