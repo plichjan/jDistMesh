@@ -30,7 +30,7 @@ class BoundEdges(private val counterClock: Boolean = false) {
         return e
     }
 
-    private fun setupOrientation(pnts: List<Pnt>, e: List<BoundBar>) {
+    fun setupOrientation(pnts: List<Pnt>, e: List<BoundBar>) {
         for (bar in e) {
             val v1 = pnts[bar.b].subtract(pnts[bar.a])
             val v2 = pnts[bar.c].subtract(pnts[bar.a])
@@ -44,7 +44,7 @@ class BoundEdges(private val counterClock: Boolean = false) {
         }
     }
 
-    private fun getBoundaryEdges(t: Array<IntArray>, n: Int): List<BoundBar> {
+    fun getBoundaryEdges(t: Array<IntArray>, n: Int): List<BoundBar> {
         val edges = TreeSet<BoundBar>()
         val innerEdges = TreeSet<BoundBar>()
         for (i in t.indices) {

@@ -7,8 +7,8 @@ import kotlin.math.min
  * Edge from point "a" to point "b".
  */
 open class Bar(a: Int, b: Int) : Comparable<Bar> {
-    var a: Int = min(a, b)
-    var b: Int = max(a, b)
+    open var a: Int = min(a, b)
+    open var b: Int = max(a, b)
 
     override fun compareTo(other: Bar): Int {
         return when {

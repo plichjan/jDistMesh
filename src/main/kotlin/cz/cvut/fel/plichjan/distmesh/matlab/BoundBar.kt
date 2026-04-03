@@ -2,7 +2,7 @@ package cz.cvut.fel.plichjan.distmesh.matlab
 
 /**
  */
-class BoundBar : Bar {
+open class BoundBar : Bar {
     var c: Int = 0
     var tr: Int = 0
     var ix: Int = 0

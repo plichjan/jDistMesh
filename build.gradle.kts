@@ -22,7 +22,13 @@ dependencies {
 }
 
 application {
-    mainClass.set("cz.cvut.fel.plichjan.ViewerFrameKt")
+    mainClass.set("cz.cvut.fel.plichjan.ViewerFrame")
+}
+
+tasks.register("printClasspath") {
+    doLast {
+        println(configurations.runtimeClasspath.get().asPath)
+    }
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
