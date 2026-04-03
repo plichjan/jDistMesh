@@ -8,10 +8,8 @@ import java.util.*
 import kotlin.math.abs
 
 // Variables for script
-// val distMesh2D = DistMesh2D() // Removed: provided by ViewerFrame
-val distMesh2D: DistMesh2D = distMesh2D_from_viewer
-
-val viewFrame: IViewer? = null 
+val distMesh2D = ScriptContext.distMesh2D
+val viewFrame = ScriptContext.viewFrame
 
 val dir = "./"
 val zero = doubleArrayOf(0.0, 0.0)

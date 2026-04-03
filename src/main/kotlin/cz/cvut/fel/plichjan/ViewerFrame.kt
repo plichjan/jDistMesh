@@ -195,6 +195,10 @@ class ViewerFrame : JFrame(), ActionListener, IViewer, Serializable {
             val distMesh2D = DistMesh2D()
             distMesh2D.setViewer(this@ViewerFrame)
 
+            // Populate ScriptContext for script support
+            ScriptContext.distMesh2D = distMesh2D
+            ScriptContext.viewFrame = this@ViewerFrame
+
             val manager = ScriptEngineManager()
             // Prefer kotlin script if possible, or fall back to javascript
             var engine = manager.getEngineByExtension("kts")
