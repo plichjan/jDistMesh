@@ -3,7 +3,7 @@ bndproj.m - 2D done, 3D, TODO
 boundedges.m - 2D, done
     Find boundary edges from triangular mesh
 circumcenter.m - ND, TODO
-    Center of cirle
+    Center of circle
 dblock.m - fd, 3D, TODO
     Distance function - 3D rectangle
 dcircle.m - fd, 2D, done
@@ -53,7 +53,7 @@ meshdemo2d.m
 meshdemond.m
     Demonstration of distmesh2d.
 mkt2t.m
-    Compute element connectivities from element indices.
+    Compute element connectives from element indices.
 protate.m TODO
     Rotate points p the angle phi around origin.
 pshift.m  TODO
